@@ -1,6 +1,6 @@
 package application
 
-import "github.com/kolaczyn/shopping-cart/db"
+import db "github.com/kolaczyn/shopping-cart/db/cart"
 
 func GetCart() CartDto {
 	dbCart := db.GetCart()

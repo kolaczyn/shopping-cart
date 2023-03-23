@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/kolaczyn/shopping-cart/application"
+	application "github.com/kolaczyn/shopping-cart/application/cart"
 )
 
 func addCartRoutes(router *gin.RouterGroup) {

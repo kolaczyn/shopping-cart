@@ -1,9 +1,8 @@
 package application
 
-import "github.com/kolaczyn/shopping-cart/db"
+import db "github.com/kolaczyn/shopping-cart/db/cart"
 
-// TODO make this a method instead of a function
-func dtoToDb(dto CartDto) db.CartDb {
+func (dto CartDto) dtoToDb() db.CartDb {
 	items := []db.CartItemDb{}
 	for _, item := range dto.Items {
 		items = append(items, db.CartItemDb{
