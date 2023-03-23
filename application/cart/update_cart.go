@@ -1,8 +1,16 @@
 package application
 
-import db "github.com/kolaczyn/shopping-cart/db/cart"
+import (
+	"errors"
 
-func UpdateCart(cart CartDto) CartDto {
+	db "github.com/kolaczyn/shopping-cart/db/cart"
+)
+
+func UpdateCart(cart CartDto) (CartDto, error) {
+	isValid := CheckIsCartValid(cart)
+	if !isValid {
+		return CartDto{}, errors.New("cart is not valid")
+	}
 	newCart := db.UpdateCart(cart.dtoToDb())
-	return dbToDto(newCart)
+	return dbToDto(newCart), nil
 }

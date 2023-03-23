@@ -21,6 +21,10 @@ func postCart(c *gin.Context) {
 	var cart application.CartDto
 	c.BindJSON(&cart)
 
-	newCart := application.UpdateCart(cart)
+	newCart, err := application.UpdateCart(cart)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
 	c.JSON(http.StatusOK, newCart)
 }
