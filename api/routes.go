@@ -10,6 +10,6 @@ func Run() {
 }
 
 func getRoutes() {
-	v1 := router.Group("/v1")
-	addCartRoutes(v1)
+	cartRoutes := router.Group("/v1/cart")
+	addCartRoutes(cartRoutes)
 }

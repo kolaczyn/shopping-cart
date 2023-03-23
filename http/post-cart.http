@@ -4,11 +4,11 @@ Content-Type: application/json
 {
   "items": [
     {
-      "productId": "123",
+      "id": 123,
       "quantity": 1
     },
     {
-      "productId": "456",
+      "id": 987,
       "quantity": 2
     }
   ]

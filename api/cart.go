@@ -8,29 +8,19 @@ import (
 )
 
 func addCartRoutes(router *gin.RouterGroup) {
+	router.GET("/", getCart)
+	router.POST("/", postCart)
+}
 
-	router.GET("/cart", func(c *gin.Context) {
-		cart := application.GetCart()
-		c.JSON(http.StatusOK, cart)
-	})
+func getCart(c *gin.Context) {
+	cart := application.GetCart()
+	c.JSON(http.StatusOK, cart)
+}
 
-	router.POST("/cart", func(c *gin.Context) {
-		// TODO read cart from request
-		cart := application.CartDto{
-			Items: []application.CartItemDto{
-				{
-					Id:       123,
-					Quantity: 1,
-				},
-				{
-					Id:       456,
-					Quantity: 2,
-				},
-			},
-		}
+func postCart(c *gin.Context) {
+	var cart application.CartDto
+	c.BindJSON(&cart)
 
-		newCart := application.UpdateCart(cart)
-		c.JSON(http.StatusOK, newCart)
-	})
-
+	newCart := application.UpdateCart(cart)
+	c.JSON(http.StatusOK, newCart)
 }
