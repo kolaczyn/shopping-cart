@@ -1,15 +1,13 @@
 package application
 
 import (
-	"errors"
-
 	db "github.com/kolaczyn/shopping-cart/db/cart"
 )
 
 func UpdateCart(cart CartDto) (CartDto, error) {
-	isValid := CheckIsCartValid(cart)
-	if !isValid {
-		return CartDto{}, errors.New("cart is not valid")
+	err := CheckIsCartValid(cart)
+	if err != nil {
+		return CartDto{}, err
 	}
 	newCart, err := db.UpdateCart(cart.dtoToDb())
 	return dbToDto(newCart), err

@@ -1,0 +1,16 @@
+POST http://localhost:8080/v1/cart
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "id": 2924,
+      "quantity": 1
+    },
+    {
+      "id": 1,
+      "quantity": 2
+    }
+  ]
+}
+
