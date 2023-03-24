@@ -11,6 +11,6 @@ func UpdateCart(cart CartDto) (CartDto, error) {
 	if !isValid {
 		return CartDto{}, errors.New("cart is not valid")
 	}
-	newCart := db.UpdateCart(cart.dtoToDb())
-	return dbToDto(newCart), nil
+	newCart, err := db.UpdateCart(cart.dtoToDb())
+	return dbToDto(newCart), err
 }

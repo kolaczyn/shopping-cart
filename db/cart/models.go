@@ -6,5 +6,6 @@ type CartItemDb struct {
 }
 
 type CartDb struct {
-	Items []CartItemDb `json:"items"`
+	Items  []CartItemDb `json:"items"`
+	UserId string       `json:"userId"`
 }
