@@ -1,6 +1,9 @@
 package main
 
-import "github.com/kolaczyn/shopping-cart/api"
+import (
+	"github.com/joho/godotenv"
+	"github.com/kolaczyn/shopping-cart/api"
+)
 
 type User struct {
 	Username string
@@ -8,6 +11,7 @@ type User struct {
 }
 
 func main() {
+	godotenv.Load()
 	// seed database if this is the first time running this app
 	// db.SeedDb()
 

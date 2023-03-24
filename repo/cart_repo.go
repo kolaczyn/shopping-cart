@@ -2,6 +2,7 @@ package repo
 
 import (
 	"context"
+	"os"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -11,7 +12,7 @@ import (
 var userId = "2137"
 
 func getCartCollection() *mongo.Collection {
-	uri := "mongodb://localhost:27017"
+	uri := os.Getenv("SHOPPING_CART_DB_URL")
 	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(uri))
 	if err != nil {
 		// It doesn't make sense to continue the program if we can't connect to the database
