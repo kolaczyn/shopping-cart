@@ -1,22 +1,22 @@
-package application
+package app
 
-import db "github.com/kolaczyn/shopping-cart/db/cart"
+import "github.com/kolaczyn/shopping-cart/repo"
 
-func (dto CartDto) dtoToDb() db.CartDb {
-	items := []db.CartItemDb{}
+func (dto CartDto) dtoToDb() repo.CartDb {
+	items := []repo.CartItemDb{}
 	for _, item := range dto.Items {
-		items = append(items, db.CartItemDb{
+		items = append(items, repo.CartItemDb{
 			Id:       item.Id,
 			Quantity: item.Quantity,
 		})
 	}
-	cart := db.CartDb{
+	cart := repo.CartDb{
 		Items: items,
 	}
 	return cart
 }
 
-func dbToDto(db db.CartDb) CartDto {
+func dbToDto(db repo.CartDb) CartDto {
 	items := []CartItemDto{}
 	for _, item := range db.Items {
 		items = append(items, CartItemDto{

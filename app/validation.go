@@ -1,14 +1,14 @@
-package application
+package app
 
 import (
 	"errors"
 
-	db "github.com/kolaczyn/shopping-cart/db/product"
+	"github.com/kolaczyn/shopping-cart/repo"
 	"github.com/samber/lo"
 )
 
 func CheckIsCartValid(cart CartDto) error {
-	products := db.GetAllProducts()
+	products := repo.GetAllProducts()
 
 	err := checkAllProductsExisting(cart.Items, products)
 	if err != nil {
@@ -28,9 +28,9 @@ func CheckIsCartValid(cart CartDto) error {
 	return nil
 }
 
-func checkAllProductsExisting(cartItems []CartItemDto, products []db.ProductDb) error {
+func checkAllProductsExisting(cartItems []CartItemDto, products []repo.ProductDb) error {
 	for _, item := range cartItems {
-		_, isFound := lo.Find(products, func(product db.ProductDb) bool {
+		_, isFound := lo.Find(products, func(product repo.ProductDb) bool {
 			return product.Id == item.Id
 		})
 		if !isFound {

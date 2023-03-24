@@ -1,4 +1,4 @@
-package db
+package repo
 
 import (
 	"fmt"
@@ -10,32 +10,31 @@ import (
 func getDb() *gorm.DB {
 	DATABASE_URL := "postgres://kolaczyn@localhost:5432/postgres"
 
-	// TODO rename the package from db to repository and rename conn to db
-	conn, err := gorm.Open(postgres.Open(DATABASE_URL), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(DATABASE_URL), &gorm.Config{})
 	if err != nil {
 		// it doesn't make sense to continue if we can't connect to the database
 		panic(err)
 	}
 
-	conn.AutoMigrate(&ProductDb{})
+	db.AutoMigrate(&ProductDb{})
 
-	return conn
+	return db
 }
 
 func SeedDb() {
-	conn := getDb()
+	db := getDb()
 
-	conn.Create(&ProductDb{
+	db.Create(&ProductDb{
 		Id:    1,
 		Name:  "Product 1",
 		Price: 1.99,
 	})
-	conn.Create(&ProductDb{
+	db.Create(&ProductDb{
 		Id:    2,
 		Name:  "Product 2",
 		Price: 2.99,
 	})
-	conn.Create(&ProductDb{
+	db.Create(&ProductDb{
 		Id:    3,
 		Name:  "Product 3",
 		Price: 3.99,
@@ -44,10 +43,10 @@ func SeedDb() {
 }
 
 func GetAllProducts() []ProductDb {
-	conn := getDb()
+	db := getDb()
 
 	var products []ProductDb
-	conn.Find(&products)
+	db.Find(&products)
 
 	for _, p := range products {
 		fmt.Println(p.Id)

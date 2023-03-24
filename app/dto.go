@@ -1,4 +1,4 @@
-package application
+package app
 
 type CartItemDto struct {
 	Id       int `json:"id"`

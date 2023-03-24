@@ -1,7 +1,7 @@
-package application
+package app
 
 import (
-	db "github.com/kolaczyn/shopping-cart/db/cart"
+	db "github.com/kolaczyn/shopping-cart/repo"
 )
 
 func UpdateCart(cart CartDto) (CartDto, error) {
