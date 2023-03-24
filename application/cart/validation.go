@@ -7,10 +7,6 @@ import (
 	"github.com/samber/lo"
 )
 
-// TODO add tests checking:
-// - if no duplicate productIds
-// - if are products are existing
-// - if quantities are positive
 func CheckIsCartValid(cart CartDto) error {
 	products := db.GetAllProducts()
 
@@ -33,7 +29,6 @@ func CheckIsCartValid(cart CartDto) error {
 }
 
 func checkAllProductsExisting(cartItems []CartItemDto, products []db.ProductDb) error {
-
 	for _, item := range cartItems {
 		_, isFound := lo.Find(products, func(product db.ProductDb) bool {
 			return product.Id == item.Id

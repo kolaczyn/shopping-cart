@@ -8,5 +8,8 @@ type User struct {
 }
 
 func main() {
+	// seed database if this is the first time running this app
+	// db.SeedDb()
+
 	api.Run()
 }
