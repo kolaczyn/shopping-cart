@@ -8,9 +8,9 @@ import (
 )
 
 func CheckIsCartValid(cart CartDto) error {
-	products := repo.GetAllProducts()
+	productIds := getProductIds(cart.Items)
+	products, err := repo.GetProductsByIds(productIds)
 
-	err := checkAllProductsExisting(cart.Items, products)
 	if err != nil {
 		return err
 	}
@@ -21,6 +21,11 @@ func CheckIsCartValid(cart CartDto) error {
 	}
 
 	err = checkForDuplicates(cart.Items)
+	if err != nil {
+		return err
+	}
+
+	err = checkAllProductsExisting(cart.Items, products)
 	if err != nil {
 		return err
 	}
@@ -50,13 +55,16 @@ func checkPositiveQuantities(items []CartItemDto) error {
 }
 
 func checkForDuplicates(items []CartItemDto) error {
-	var result []int = lo.Map(items, func(item CartItemDto, _ int) int {
-		return item.Id
-	})
-	// I can probably make it shorter by using lo.FindDuplicatesBy
-	duplicates := lo.FindDuplicates(result)
+	productIds := getProductIds(items)
+	duplicates := lo.FindDuplicates(productIds)
 	if len(duplicates) > 0 {
 		return errors.New("there are duplicates")
 	}
 	return nil
+}
+
+func getProductIds(items []CartItemDto) []int {
+	return lo.Map(items, func(item CartItemDto, _ int) int {
+		return item.Id
+	})
 }

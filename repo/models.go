@@ -3,13 +3,13 @@ package repo
 import "gorm.io/gorm"
 
 type CartItemDb struct {
-	Id       int `json:"id"`
-	Quantity int `json:"quantity"`
+	Id       int
+	Quantity int
 }
 
 type CartDb struct {
-	Items  []CartItemDb `json:"items"`
-	UserId string       `json:"userId"`
+	Items  []CartItemDb
+	UserId string
 }
 
 type ProductDb struct {

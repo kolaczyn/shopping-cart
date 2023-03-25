@@ -42,11 +42,11 @@ func SeedDb() {
 
 }
 
-func GetAllProducts() []ProductDb {
-	db := getDb()
-
+func GetProductsByIds(ids []int) ([]ProductDb, error) {
 	var products []ProductDb
-	db.Find(&products)
-
-	return products
+	err := getDb().Where("id IN ?", ids).Find(&products).Error
+	if err != nil {
+		return nil, err
+	}
+	return products, nil
 }

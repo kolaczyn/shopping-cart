@@ -26,8 +26,7 @@ func getCartCollection() *mongo.Collection {
 func UpdateCart(cart CartDb) (CartDb, error) {
 	opts := options.Update().SetUpsert(true)
 	// TODO check if the cart exists
-	result, err := getCartCollection().UpdateOne(context.Background(), bson.M{"userId": userId}, bson.M{"$set": cart}, opts)
-	println("Updated", result.ModifiedCount, "documents")
+	_, err := getCartCollection().UpdateOne(context.Background(), bson.M{"userId": userId}, bson.M{"$set": cart}, opts)
 	return cart, err
 }
 
