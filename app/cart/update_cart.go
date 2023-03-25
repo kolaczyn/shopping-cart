@@ -1,4 +1,4 @@
-package app
+package appCart
 
 import (
 	db "github.com/kolaczyn/shopping-cart/repo"

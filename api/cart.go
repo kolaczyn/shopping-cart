@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/kolaczyn/shopping-cart/app"
+	appCart "github.com/kolaczyn/shopping-cart/app/cart"
 )
 
 func addCartRoutes(router *gin.RouterGroup) {
@@ -16,7 +16,7 @@ func addCartRoutes(router *gin.RouterGroup) {
 }
 
 func getCart(c *gin.Context) {
-	cart, err := app.GetCart()
+	cart, err := appCart.GetCart()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err.Error())
 		return
@@ -25,10 +25,10 @@ func getCart(c *gin.Context) {
 }
 
 func postCart(c *gin.Context) {
-	var cart app.CartDto
+	var cart appCart.CartDto
 	c.BindJSON(&cart)
 
-	newCart, err := app.UpdateCart(cart)
+	newCart, err := appCart.UpdateCart(cart)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err.Error())
 		return
@@ -37,7 +37,7 @@ func postCart(c *gin.Context) {
 }
 
 func deleteCart(c *gin.Context) {
-	err := app.DeleteCart()
+	err := appCart.DeleteCart()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err.Error())
 		return
@@ -46,7 +46,7 @@ func deleteCart(c *gin.Context) {
 }
 
 func getCartSummary(c *gin.Context) {
-	summary, err := app.GetCartSummary()
+	summary, err := appCart.GetCartSummary()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err.Error())
 		return

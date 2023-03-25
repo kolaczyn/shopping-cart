@@ -1,6 +1,6 @@
-package app
+package appAuth
 
-func Login(email string, password string) (UserDto, error) {
+func Register(email string, password string) (UserDto, error) {
 	// TODO implement
 	user := UserDto{
 		Id:    1,
