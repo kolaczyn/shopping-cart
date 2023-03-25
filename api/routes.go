@@ -11,5 +11,7 @@ func Run() {
 
 func getRoutes() {
 	cartRoutes := router.Group("/v1/cart")
+	authRoutes := router.Group("/v1/auth")
 	addCartRoutes(cartRoutes)
+	addAuthRoutes(authRoutes)
 }
