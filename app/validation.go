@@ -8,7 +8,7 @@ import (
 )
 
 func CheckIsCartValid(cart CartDto) error {
-	productIds := getProductIds(cart.Items)
+	productIds := getProductIdsDto(cart.Items)
 	products, err := repo.GetProductsByIds(productIds)
 
 	if err != nil {
@@ -55,16 +55,10 @@ func checkPositiveQuantities(items []CartItemDto) error {
 }
 
 func checkForDuplicates(items []CartItemDto) error {
-	productIds := getProductIds(items)
+	productIds := getProductIdsDto(items)
 	duplicates := lo.FindDuplicates(productIds)
 	if len(duplicates) > 0 {
 		return errors.New("there are duplicates")
 	}
 	return nil
-}
-
-func getProductIds(items []CartItemDto) []int {
-	return lo.Map(items, func(item CartItemDto, _ int) int {
-		return item.Id
-	})
 }

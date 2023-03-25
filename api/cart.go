@@ -11,6 +11,8 @@ func addCartRoutes(router *gin.RouterGroup) {
 	router.GET("/", getCart)
 	router.POST("/", postCart)
 	router.DELETE("/", deleteCart)
+
+	router.GET("/summary", getCartSummary)
 }
 
 func getCart(c *gin.Context) {
@@ -41,4 +43,13 @@ func deleteCart(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, "ok")
+}
+
+func getCartSummary(c *gin.Context) {
+	summary, err := app.GetCartSummary()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, summary)
 }
