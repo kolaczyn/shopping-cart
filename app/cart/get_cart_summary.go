@@ -21,10 +21,10 @@ func GetCartSummary() (CartSummaryDto, error) {
 }
 
 // TODO add tests
-func mergeProductsWithCart(cartItems []repo.CartItemDb, products []repo.ProductDb) (CartSummaryDto, error) {
-	cartSummaryItems := lo.FilterMap(cartItems, func(cartItem repo.CartItemDb, _ int) (CartItemSummaryDto, bool) {
+func mergeProductsWithCart(cartItems []repo.CartItem, products []repo.Product) (CartSummaryDto, error) {
+	cartSummaryItems := lo.FilterMap(cartItems, func(cartItem repo.CartItem, _ int) (CartItemSummaryDto, bool) {
 		// yeah, I know thia is something like O(n^2) but I don't care :p
-		product, isFound := lo.Find(products, func(product repo.ProductDb) bool {
+		product, isFound := lo.Find(products, func(product repo.Product) bool {
 			return product.Id == cartItem.Id
 		})
 		if !isFound {

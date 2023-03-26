@@ -33,9 +33,9 @@ func CheckIsCartValid(cart CartDto) error {
 	return nil
 }
 
-func checkAllProductsExisting(cartItems []CartItemDto, products []repo.ProductDb) error {
+func checkAllProductsExisting(cartItems []CartItemDto, products []repo.Product) error {
 	for _, item := range cartItems {
-		_, isFound := lo.Find(products, func(product repo.ProductDb) bool {
+		_, isFound := lo.Find(products, func(product repo.Product) bool {
 			return product.Id == item.Id
 		})
 		if !isFound {

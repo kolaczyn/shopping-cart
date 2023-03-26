@@ -1,11 +1,17 @@
 package appAuth
 
+import "github.com/kolaczyn/shopping-cart/repo"
+
 func Register(email string, password string) (UserDto, error) {
-	// TODO implement
-	user := UserDto{
-		Id:    1,
-		Email: email,
-		Token: "token",
+	user, err := repo.CreateUser(email, password)
+	if err != nil {
+		return UserDto{}, err
 	}
-	return user, nil
+
+	return UserDto{
+		Id:    user.Id,
+		Email: user.Email,
+		// TODO
+		Token: "token",
+	}, nil
 }

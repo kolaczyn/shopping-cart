@@ -38,12 +38,12 @@ func login(c *gin.Context) {
 		return
 	}
 
-	user, err := appAuth.Register(form.Email, form.Password)
+	user, err := appAuth.Login(form.Email, form.Password)
 	if err != nil {
 		// TODO this shouldn't always return 400
 		c.JSON(http.StatusBadRequest, err.Error())
 		return
 	}
 
-	c.JSON(http.StatusCreated, user)
+	c.JSON(http.StatusOK, user)
 }

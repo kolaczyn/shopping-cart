@@ -13,7 +13,7 @@ type User struct {
 func main() {
 	godotenv.Load()
 	// seed database if this is the first time running this app
-	// db.SeedDb()
+	// repo.SeedDb()
 
 	api.Run()
 }

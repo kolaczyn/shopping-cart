@@ -11,8 +11,8 @@ func getProductIdsDto(items []CartItemDto) []int {
 	})
 }
 
-func getProductIdsDb(items []repo.CartItemDb) []int {
-	return lo.Map(items, func(item repo.CartItemDb, _ int) int {
+func getProductIdsDb(items []repo.CartItem) []int {
+	return lo.Map(items, func(item repo.CartItem, _ int) int {
 		return item.Id
 	})
 }

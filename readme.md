@@ -6,7 +6,7 @@
 - setup MongoDb
 - setup Postgres
 - seed database:
-  - 1. comment out `db.SeedDb()` in `main.go`
+  - 1. comment out `repo.SeedDb()` in `main.go`
   - 2. run the app with `go run main.go`
   - 3. comment the line from step 1.
 

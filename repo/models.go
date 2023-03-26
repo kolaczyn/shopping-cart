@@ -2,19 +2,26 @@ package repo
 
 import "gorm.io/gorm"
 
-type CartItemDb struct {
+type CartItem struct {
 	Id       int
 	Quantity int
 }
 
-type CartDb struct {
-	Items  []CartItemDb
+type Cart struct {
+	Items  []CartItem
 	UserId string
 }
 
-type ProductDb struct {
+type Product struct {
 	gorm.Model
 	Id    int
 	Name  string
 	Price float64
+}
+
+type User struct {
+	gorm.Model
+	Id           int
+	Email        string `gorm:"uniqueIndex"`
+	PasswordHash string
 }
