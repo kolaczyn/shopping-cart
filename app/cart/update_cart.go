@@ -9,6 +9,6 @@ func UpdateCart(cart CartDto) (CartDto, error) {
 	if err != nil {
 		return CartDto{}, err
 	}
-	newCart, err := db.UpdateCart(cart.dtoToDb())
-	return dbToDto(newCart), err
+	newCart, err := db.UpdateCart(*cart.dtoToDb())
+	return *dbToDto(newCart), err
 }

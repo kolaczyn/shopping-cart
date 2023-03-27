@@ -23,17 +23,17 @@ func getCartCollection() *mongo.Collection {
 	return collection
 }
 
-func UpdateCart(cart Cart) (Cart, error) {
+func UpdateCart(cart Cart) (*Cart, error) {
 	opts := options.Update().SetUpsert(true)
 	// TODO check if the cart exists
 	_, err := getCartCollection().UpdateOne(context.Background(), bson.M{"userId": userId}, bson.M{"$set": cart}, opts)
-	return cart, err
+	return &cart, err
 }
 
-func GetCart() (Cart, error) {
+func GetCart() (*Cart, error) {
 	var cart = Cart{}
 	err := getCartCollection().FindOne(context.Background(), bson.M{"userId": userId}).Decode(&cart)
-	return cart, err
+	return &cart, err
 }
 
 func DeleteCart() error {

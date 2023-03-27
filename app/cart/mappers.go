@@ -2,7 +2,7 @@ package appCart
 
 import "github.com/kolaczyn/shopping-cart/repo"
 
-func (dto CartDto) dtoToDb() repo.Cart {
+func (dto *CartDto) dtoToDb() *repo.Cart {
 	items := []repo.CartItem{}
 	for _, item := range dto.Items {
 		items = append(items, repo.CartItem{
@@ -13,10 +13,10 @@ func (dto CartDto) dtoToDb() repo.Cart {
 	cart := repo.Cart{
 		Items: items,
 	}
-	return cart
+	return &cart
 }
 
-func dbToDto(db repo.Cart) CartDto {
+func dbToDto(db *repo.Cart) *CartDto {
 	items := []CartItemDto{}
 	for _, item := range db.Items {
 		items = append(items, CartItemDto{
@@ -27,5 +27,5 @@ func dbToDto(db repo.Cart) CartDto {
 	cart := CartDto{
 		Items: items,
 	}
-	return cart
+	return &cart
 }

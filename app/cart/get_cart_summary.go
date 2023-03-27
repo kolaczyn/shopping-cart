@@ -5,23 +5,23 @@ import (
 	"github.com/samber/lo"
 )
 
-func GetCartSummary() (CartSummaryDto, error) {
+func GetCartSummary() (*CartSummaryDto, error) {
 	dbCart, err := repo.GetCart()
 	if err != nil {
-		return CartSummaryDto{}, err
+		return nil, err
 	}
 	productIds := getProductIdsDb(dbCart.Items)
 	products, err := repo.GetProductsByIds(productIds)
 	if err != nil {
-		return CartSummaryDto{}, err
+		return nil, err
 	}
 
-	cartSummary, err := mergeProductsWithCart(dbCart.Items, products)
+	cartSummary, err := mergeProductsWithCart(dbCart.Items, *products)
 	return cartSummary, err
 }
 
 // TODO add tests
-func mergeProductsWithCart(cartItems []repo.CartItem, products []repo.Product) (CartSummaryDto, error) {
+func mergeProductsWithCart(cartItems []repo.CartItem, products []repo.Product) (*CartSummaryDto, error) {
 	cartSummaryItems := lo.FilterMap(cartItems, func(cartItem repo.CartItem, _ int) (CartItemSummaryDto, bool) {
 		// yeah, I know thia is something like O(n^2) but I don't care :p
 		product, isFound := lo.Find(products, func(product repo.Product) bool {
@@ -47,7 +47,7 @@ func mergeProductsWithCart(cartItems []repo.CartItem, products []repo.Product) (
 
 	roundedTotal = float64(int(roundedTotal*100)) / 100
 
-	return CartSummaryDto{
+	return &CartSummaryDto{
 		Items: cartSummaryItems,
 		Total: roundedTotal,
 	}, nil

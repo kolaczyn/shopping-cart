@@ -10,7 +10,7 @@ func TestDuplicates(t *testing.T) {
 		{Id: 1, Quantity: 1},
 	}
 
-	err := checkForDuplicates(items)
+	err := checkForDuplicates(&items)
 	// Something here is looking funny, but whatever :p
 	if err == nil {
 		t.Error("should be duplicates")
@@ -24,7 +24,7 @@ func TestNoDuplicates(t *testing.T) {
 		{Id: 3, Quantity: 1},
 	}
 
-	err := checkForDuplicates(items)
+	err := checkForDuplicates(&items)
 	if err != nil {
 		t.Error("should be no duplicates")
 	}
